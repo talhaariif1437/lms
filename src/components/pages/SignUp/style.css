@@ -1,16 +1,42 @@
 .wrapper {
+  position: relative;
   width: 420px;
-  background-color: transparent;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid rgb(17, 96, 7);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(30px);
-  color: #fff;
+  color: black;
   border-radius: 10px;
   padding: 30px 40px;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.5
+  ); /* Adjust the alpha value for transparency */
+}
+
+.wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: url("C:\Users\tasif\OneDrive\Documents\lms\src\Components\Assets\background.jpg")
+    no-repeat;
+  opacity: 0.5; /* Adjust the opacity as needed */
+  z-index: -1;
+  border-radius: 10px; /* Ensure the pseudo-element covers the rounded corners */
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 .wrapper h1 {
   font-size: 36px;
   text-align: center;
+  color: #0d3e02;
 }
 .wrapper .input-box {
   position: relative;
@@ -22,15 +48,15 @@
   width: 100%;
   height: 100%;
   background-color: transparent;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid rgb(17, 96, 7);
   outline: none;
   border-radius: 40px;
   font-size: 16px;
-  color: #fff;
+  color: black;
   padding: 20px 45px 20px 20px;
 }
 .input-box input::placeholder {
-  color: #fff;
+  color: black;
 }
 .input-box .icon {
   position: absolute;
@@ -41,14 +67,14 @@
 .wrapper button {
   width: 100%;
   height: 45px;
-  background-color: #fff;
+  background-color: #0d3e02;
   border: none;
   outline: none;
   border-radius: 40px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   font-size: 16px;
-  color: #333;
+  color: white;
   font-weight: 700;
 }
 .wrapper .register-link {
@@ -57,7 +83,7 @@
   margin: 20px 0 15px;
 }
 .register-link p a {
-  color: #fff;
+  color: black;
   text-decoration: none;
   font-weight: 600;
 }
