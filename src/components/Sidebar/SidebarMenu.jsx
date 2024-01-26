@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
-import React, { useState, useEffect } from "react";
-import { FaAngleDown } from "react-icons/fa";
+import { useState, useEffect } from "react";
+import React, { FaAngleDown } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 
 const menuAnimation = {
@@ -68,14 +68,7 @@ const SidebarMenu = ({ route, showAnimation, isOpen, setIsOpen }) => {
         </div>
         {isOpen && (
           <motion.div
-            animate={
-              isMenuOpen
-                ? {
-                    rotate: -90,
-                  }
-                : { rotate: 0 }
-            }
-          >
+            animate={isMenuOpen ? {rotate: -90,}: { rotate: 0 } }>
             <FaAngleDown />
           </motion.div>
         )}

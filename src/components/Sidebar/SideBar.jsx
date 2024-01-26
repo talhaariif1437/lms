@@ -1,13 +1,21 @@
 import { NavLink } from "react-router-dom";
 import { FaBars, FaHome, FaLock, FaMoneyBill, FaUser } from "react-icons/fa";
-import { MdMessage } from "react-icons/md";
+import { RiFileEditFill } from "react-icons/ri";
+import { MdAssignmentAdd } from "react-icons/md";
+import { RiDeleteBin5Fill } from "react-icons/ri";
+import { FaLayerGroup } from "react-icons/fa";
+import { FaBookDead } from "react-icons/fa";
 import { BiAnalyse, BiSearch } from "react-icons/bi";
 import { BiCog } from "react-icons/bi";
 import { AiFillHeart, AiTwotoneFileExclamation } from "react-icons/ai";
-import { BsCartCheck } from "react-icons/bs";
+import { FaBookJournalWhills } from "react-icons/fa6";
+import { FaBookAtlas } from "react-icons/fa6";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SidebarMenu from "./SidebarMenu";
+import styled from 'styled-components';
+
+
 const routes = [
   {
     path: "/",
@@ -15,55 +23,76 @@ const routes = [
     icon: <FaHome />,
   },
   {
-    path: "/users",
-    name: "Users",
-    icon: <FaUser />,
-  },
-  {
-    path: "/messages",
-    name: "Messages",
-    icon: <MdMessage />,
-  },
-  {
-    path: "/analytics",
-    name: "Analytics",
-    icon: <BiAnalyse />,
-  },
-  {
-    path: "/file-manager",
-    name: "File Manager",
-    icon: <AiTwotoneFileExclamation />,
+    path: "/courses",
+    name: "Courses",
+    icon: <FaLayerGroup />,
     subRoutes: [
       {
-        path: "/settings/profile",
-        name: "Profile ",
-        icon: <FaUser />,
+        path: "/courses/dsa",
+        name: "DSA",
+        icon: <FaBookDead />,
       },
       {
-        path: "/settings/2fa",
-        name: "2FA",
-        icon: <FaLock />,
+        path: "/courses/oop",
+        name: "OOP",
+        icon: <FaBookJournalWhills />,
       },
       {
-        path: "/settings/billing",
-        name: "Billing",
-        icon: <FaMoneyBill />,
+        path: "/courses/cn",
+        name: "CN",
+        icon: <FaBookAtlas />,
       },
     ],
   },
   {
-    path: "/order",
-    name: "Order",
-    icon: <BsCartCheck />,
+    path: "/addcourses",
+    name: "Add Courses",
+    icon: <MdAssignmentAdd />,
   },
+  {
+    path: "/editcourses",
+    name: "Edit Courses",
+    icon: <RiFileEditFill />,
+  },
+  {
+    path: "/deletecourses",
+    name: "Delete Courses",
+    icon: <RiDeleteBin5Fill />,
+  },
+  
+  
   {
     path: "/settings",
     name: "Settings",
     icon: <BiCog />,
+    // exact: true,
+    // subRoutes: [
+      //   {
+    //     path: "/settings/profile",
+    //     name: "Profile ",
+    //     icon: <FaUser />,
+    //   },
+    //   {
+      //     path: "/settings/2fa",
+      //     name: "2FA",
+      //     icon: <FaLock />,
+      //   },
+      //   {
+        //     path: "/settings/billing",
+        //     name: "Billing",
+        //     icon: <FaMoneyBill />,
+        //   },
+    // ],
+  },
+  
+  {
+    path: "/users",
+    name: "Users",
+    icon: <FaUser />,
     exact: true,
     subRoutes: [
       {
-        path: "/settings/profile",
+        path: "/users/profile",
         name: "Profile ",
         icon: <FaUser />,
       },
@@ -73,20 +102,15 @@ const routes = [
         icon: <FaLock />,
       },
       {
-        path: "/settings/billing",
+        path: "/users/billing",
         name: "Billing",
         icon: <FaMoneyBill />,
       },
     ],
-  },
-  {
-    path: "/saved",
-    name: "Saved",
-    icon: <AiFillHeart />,
-  },
+  }
 ];
 
-const SideBar = ({ children }) => {
+const SideBar  = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   const inputAnimation = {
@@ -123,20 +147,37 @@ const SideBar = ({ children }) => {
     },
   };
 
+const overlay = styled.div`
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.5);
+z-index: 199; `
+
+  const SidebarWrapper = styled.div`
+  @media screen and (max-width:400px){
+    &:hover{
+      color: red;
+    }
+  }`
+
   return (
     <>
-      <div className="main-container">
+      <SidebarWrapper className="main-container">
+      {isOpen && <overlay onClick={toggle} />}
         <motion.div
           animate={{
             width: isOpen ? "200px" : "45px",
-
+            
             transition: {
               duration: 0.5,
               type: "spring",
               damping: 10,
             },
           }}
-          className={`sidebar `}
+          className={`sidebar `} 
         >
           <div className="top_section">
             <AnimatePresence>
@@ -148,7 +189,7 @@ const SideBar = ({ children }) => {
                   exit="hidden"
                   className="logo"
                 >
-                  DoSomeCoding
+                  LMS 
                 </motion.h1>
               )}
             </AnimatePresence>
@@ -157,23 +198,7 @@ const SideBar = ({ children }) => {
               <FaBars onClick={toggle} />
             </div>
           </div>
-          <div className="search">
-            <div className="search_icon">
-              <BiSearch />
-            </div>
-            <AnimatePresence>
-              {isOpen && (
-                <motion.input
-                  initial="hidden"
-                  animate="show"
-                  exit="hidden"
-                  variants={inputAnimation}
-                  type="text"
-                  placeholder="Search"
-                />
-              )}
-            </AnimatePresence>
-          </div>
+
           <section className="routes">
             {routes.map((route, index) => {
               if (route.subRoutes) {
@@ -215,7 +240,7 @@ const SideBar = ({ children }) => {
         </motion.div>
 
         <main>{children}</main>
-      </div>
+      </SidebarWrapper>
     </>
   );
 };

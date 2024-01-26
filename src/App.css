@@ -8,7 +8,8 @@
   display: flex;
 }
 main {
-  padding: 10px;
+  width: 100%;
+  /* justify-content: center; */
 }
 
 .title {
@@ -19,7 +20,7 @@ main {
 
 /* Sidebar */
 .sidebar {
-  background: rgb(0, 7, 61);
+  background: rgb(107, 107, 109);
   color: white;
   height: 100vh;
   overflow-y: auto;
@@ -106,4 +107,8 @@ main {
 .menu_container .link {
   padding-left: 20px;
   border-bottom: #fff 0.5px solid;
+}
+
+@media (max-width: 450px) {
+  
 }
