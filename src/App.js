@@ -13,7 +13,10 @@ import DSA from "./pages/Courses/DSA";
 import OOP from "./pages/Courses/OOP";
 import CN from "./pages/Courses/CN";
 import Billing from "./pages/Users/Billing";
-import Profile from "./pages/Users/Profile";
+import Profile from "./pages/Users/Profile";  
+
+
+
 function App() {
   return (
     <Router>
